@@ -37,49 +37,52 @@
     {
       "group": "Assinaturas",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/assinaturas/create",
+        "api-reference/assinaturas/list",
+        "api-reference/assinaturas/withoutplan",
+        "api-reference/assinaturas/cancel"
       ]
     },
     {
       "group": "Clientes",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/clientes/create",
+        "api-reference/clientes/edit",
+        "api-reference/clientes/list"
       ]
     },
     {
       "group": "Planos",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/planos/create",
+        "api-reference/planos/edit",
+        "api-reference/planos/delete"
       ]
     },
     {
-      "group": "Pedido",
+      "group": "Pedidos",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/pedidos/create",
+        "api-reference/pedidos/charge",
+        "api-reference/pedidos/retry",
+        "api-reference/pedidos/list",
+        "api-reference/pedidos/cancelcharge"
       ]
     },
     {
       "group": "Checkout",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/checkout/get",
+        "api-reference/checkout/create",
+        "api-reference/checkout/delete"
       ]
     },
     {
       "group": "Cartão",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/cartao/get",
+        "api-reference/cartao/create",
+        "api-reference/cartao/delete"
       ]
     }
   ]
