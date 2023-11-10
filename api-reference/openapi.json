@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/subscription": {
       "get": {
         "description": "Returns all plants from the system that the user has access to",
         "parameters": [
@@ -60,13 +60,13 @@
         }
       },
       "post": {
-        "description": "Creates a new plant in the store",
+        "description": "Cria uma nova assinatura",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "Assinatura para ser criada",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/NewSubscription"
               }
             }
           },
@@ -74,11 +74,11 @@
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Resposta quando der sucesso",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/SubscriptionResponseSuccess"
                 }
               }
             }
@@ -148,23 +148,433 @@
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "SubscriptionRequest": {
+        "required": [
+          "cliente",
+          "cartao",
+          "installments",
+          "plano_id",
+          "metodo_pagamento",
+          "cliente_id",
+          "codigo"
+        ],
+        "type": "object",
+        "properties": {
+          "cliente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "description": "Nome do cliente",
+                "type": "string"
+              },
+              "email": {
+                "description": "E-mail do cliente",
+                "type": "string"
+              }
+            }
           },
-          {
-            "required": [
-              "id"
-            ],
+          "cartao": {
+            "type": "object",
+            "properties": {
+              "numero": {
+                "description": "Número do cartão. Ex: 5586953991367179",
+                "type": "string"
+              },
+              "nome": {
+                "description": "Nome do cliente no cartão. Ex: Tony Stark",
+                "type": "string"
+              },
+              "exp_mes": {
+                "description": "Mês de validade do cartão. Ex: 7",
+                "type": "string"
+              },
+              "exp_ano": {
+                "description": "Ano de validade do cartão. Ex: 2029",
+                "type": "string"
+              },
+              "cvv": {
+                "description": "Código cvv do cartão. Ex: 123",
+                "type": "string"
+              }
+            }
+          },
+          "installments": {
+            "description": "Quantidade de parcelas. Ex: 1",
+            "type": "string"
+          },
+          "plano_id": {
+            "description": "Plano id criado pelo pagarme Ex: plan_21r4CTG0ux77Qv13",
+            "type": "string"
+          },
+          "metodo_pagamento": {
+            "description": "Método de pagamento. Ex: credit_card",
+            "type": "string"
+          },
+          "cliente_id": {
+            "description": "Cliente id gerado pelo pagarme. Ex: cus_5WjRApVfdfx7XKr3",
+            "type": "string"
+          },
+          "codigo": {
+            "description": "Código da assinatura no sistema da uniodonto. Ex: 543723",
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionResponseSuccess": {
+        "description": "Resposta da operação de assinatura",
+        "required": [
+          "assinatura",
+          "status",
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "assinatura": {
+            "description": "Detalhes da assinatura",
             "type": "object",
             "properties": {
               "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+                "description": "Identificação única da assinatura",
+                "type": "string"
+              },
+              "code": {
+                "description": "Código da assinatura",
+                "type": "string"
+              },
+              "start_at": {
+                "description": "Data de início da assinatura",
+                "type": "string",
+                "format": "date-time"
+              },
+              "interval": {
+                "description": "Intervalo de cobrança",
+                "type": "string"
+              },
+              "interval_count": {
+                "description": "Número de intervalos",
+                "type": "integer"
+              },
+              "billing_type": {
+                "description": "Tipo de faturamento",
+                "type": "string"
+              },
+              "current_cycle": {
+                "description": "Detalhes do ciclo atual",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do ciclo atual",
+                    "type": "string"
+                  },
+                  "start_at": {
+                    "description": "Data de início do ciclo atual",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "end_at": {
+                    "description": "Data de término do ciclo atual",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "billing_at": {
+                    "description": "Data de faturamento do ciclo atual",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "status": {
+                    "description": "Status do ciclo atual",
+                    "type": "string"
+                  },
+                  "cycle": {
+                    "description": "Número do ciclo",
+                    "type": "integer"
+                  }
+                }
+              },
+              "next_billing_at": {
+                "description": "Próxima data de faturamento",
+                "type": "string",
+                "format": "date-time"
+              },
+              "payment_method": {
+                "description": "Método de pagamento",
+                "type": "string"
+              },
+              "currency": {
+                "description": "Moeda",
+                "type": "string"
+              },
+              "installments": {
+                "description": "Número de parcelas",
+                "type": "integer"
+              },
+              "status": {
+                "description": "Status da assinatura",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Data de criação da assinatura",
+                "type": "string",
+                "format": "date-time"
+              },
+              "updated_at": {
+                "description": "Data de atualização da assinatura",
+                "type": "string",
+                "format": "date-time"
+              },
+              "customer": {
+                "description": "Detalhes do cliente",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do cliente",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Nome do cliente",
+                    "type": "string"
+                  },
+                  "email": {
+                    "description": "Endereço de e-mail do cliente",
+                    "type": "string"
+                  },
+                  "code": {
+                    "description": "Código do cliente",
+                    "type": "string"
+                  },
+                  "document": {
+                    "description": "Número do documento do cliente",
+                    "type": "string"
+                  },
+                  "document_type": {
+                    "description": "Tipo de documento do cliente",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Tipo de cliente",
+                    "type": "string"
+                  },
+                  "gender": {
+                    "description": "Gênero do cliente",
+                    "type": "string"
+                  },
+                  "delinquent": {
+                    "description": "Indica se o cliente está inadimplente",
+                    "type": "boolean"
+                  },
+                  "created_at": {
+                    "description": "Data de criação do cliente",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "updated_at": {
+                    "description": "Data de atualização do cliente",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "birthdate": {
+                    "description": "Data de nascimento do cliente",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "phones": {
+                    "description": "Detalhes dos telefones do cliente",
+                    "type": "object"
+                  }
+                }
+              },
+              "card": {
+                "description": "Detalhes do cartão de crédito",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do cartão",
+                    "type": "string"
+                  },
+                  "first_six_digits": {
+                    "description": "Primeiros seis dígitos do cartão",
+                    "type": "string"
+                  },
+                  "last_four_digits": {
+                    "description": "Últimos quatro dígitos do cartão",
+                    "type": "string"
+                  },
+                  "brand": {
+                    "description": "Bandeira do cartão",
+                    "type": "string"
+                  },
+                  "holder_name": {
+                    "description": "Nome do titular do cartão",
+                    "type": "string"
+                  },
+                  "exp_month": {
+                    "description": "Mês de expiração do cartão",
+                    "type": "integer"
+                  },
+                  "exp_year": {
+                    "description": "Ano de expiração do cartão",
+                    "type": "integer"
+                  },
+                  "status": {
+                    "description": "Status do cartão",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "Tipo de cartão",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "description": "Data de criação do cartão",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "updated_at": {
+                    "description": "Data de atualização do cartão",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "plan": {
+                "description": "Detalhes do plano",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do plano",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Nome do plano",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "URL do plano",
+                    "type": "string"
+                  },
+                  "interval": {
+                    "description": "Intervalo de cobrança do plano",
+                    "type": "string"
+                  },
+                  "interval_count": {
+                    "description": "Número de intervalos do plano",
+                    "type": "integer"
+                  },
+                  "billing_type": {
+                    "description": "Tipo de faturamento do plano",
+                    "type": "string"
+                  },
+                  "payment_methods": {
+                    "description": "Métodos de pagamento aceitos pelo plano",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "installments": {
+                    "description": "Número de parcelas permitidas pelo plano",
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "status": {
+                    "description": "Status do plano",
+                    "type": "string"
+                  },
+                  "currency": {
+                    "description": "Moeda do plano",
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "description": "Data de criação do plano",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "updated_at": {
+                    "description": "Data de atualização do plano",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "items": {
+                "description": "Itens incluídos na assinatura",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "Identificação única do item",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Nome do item",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "Descrição do item",
+                      "type": "string"
+                    },
+                    "quantity": {
+                      "description": "Quantidade do item",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "Status do item",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Data de criação do item",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated_at": {
+                      "description": "Data de atualização do item",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "pricing_scheme": {
+                      "description": "Esquema de precificação do item",
+                      "type": "object",
+                      "properties": {
+                        "price": {
+                          "description": "Preço do item",
+                          "type": "integer"
+                        },
+                        "scheme_type": {
+                          "description": "Tipo de esquema de precificação",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "boleto": {
+                "description": "Detalhes do boleto, se aplicável",
+                "type": "object"
               }
             }
+          },
+          "status": {
+            "description": "Status da operação",
+            "type": "string"
+          },
+          "code": {
+            "description": "Código da operação",
+            "type": "string"
+          },
+          "message": {
+            "description": "Mensagem descritiva da operação",
+            "type": "string"
+          }
+        }
+      },
+      "NewSubscription": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SubscriptionRequest"
           }
         ]
       },
