@@ -355,6 +355,44 @@
           }
         }
       }
+    },
+    "/plan/delete": {
+      "post": {
+        "description": "Cria uma nova assinatura",
+        "requestBody": {
+          "description": "Assinatura para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanDeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2740,6 +2778,113 @@
             "description": "Mensagem da operação",
             "type": "string",
             "example": "Plano editado com sucesso!"
+          }
+        }
+      },
+      "PlanDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "plano_id": {
+            "description": "ID do plano",
+            "type": "string",
+            "example": "plan_81a5671ujukM0bnz"
+          }
+        }
+      },
+      "PlanDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "plano": {
+            "description": "Detalhes do plano",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID do plano",
+                "example": "plan_81a5671ujukM0bnz"
+              },
+              "name": {
+                "type": "string",
+                "description": "Nome do plano",
+                "example": "Plano Teste"
+              },
+              "url": {
+                "type": "string",
+                "description": "URL do plano",
+                "example": "plans/plan_81a5671ujukM0bnz/uniodonto-administradora/plano-teste"
+              },
+              "interval": {
+                "type": "string",
+                "description": "Intervalo de cobrança (ex: month)",
+                "example": "month"
+              },
+              "interval_count": {
+                "type": "integer",
+                "description": "Número de intervalos",
+                "example": 1
+              },
+              "billing_type": {
+                "type": "string",
+                "description": "Tipo de cobrança (ex: prepaid)",
+                "example": "prepaid"
+              },
+              "payment_methods": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Métodos de pagamento aceitos",
+                "example": ["credit_card"]
+              },
+              "installments": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "description": "Número de parcelas disponíveis",
+                "example": [1]
+              },
+              "status": {
+                "type": "string",
+                "description": "Status do plano (ex: deleted)",
+                "example": "deleted"
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda (ex: BRL)",
+                "example": "BRL"
+              },
+              "created_at": {
+                "type": "string",
+                "description": "Data de criação do plano",
+                "example": "2023-11-03T18:26:22Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "Data de última atualização do plano",
+                "example": "2023-11-06T18:20:31Z"
+              },
+              "deleted_at": {
+                "type": "string",
+                "description": "Data de exclusão do plano",
+                "example": "2023-11-06T18:20:31Z"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Status da resposta (ex: success)",
+            "example": "success"
+          },
+          "code": {
+            "type": "string",
+            "description": "Código da resposta (ex: 200)",
+            "example": "200"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensagem da resposta",
+            "example": "Plano excluído com sucesso!"
           }
         }
       },
