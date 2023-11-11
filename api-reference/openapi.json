@@ -469,6 +469,44 @@
           }
         }
       }
+    },
+    "/order/search": {
+      "post": {
+        "description": "Cria uma cobrança",
+        "requestBody": {
+          "description": "Cobrança para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderRetryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3940,6 +3978,52 @@
                 "example": "Cobrança reprocessada com sucesso!"
             }
         }
+      },
+      "OrderSearchRequest": {
+        "type": "object",
+        "properties": {
+          "cliente_id": {
+            "type": "string",
+            "description": "ID do cliente",
+            "example": "ch_LW86m1VIGohJO142"
+          },
+          "data_inicio_periodo_criacao": {
+            "type": "string",
+            "format": "date",
+            "description": "Data de início do período de criação",
+            "example": "2023-11-08"
+          },
+          "data_final_periodo_criacao": {
+            "type": "string",
+            "format": "date",
+            "description": "Data de término do período de criação",
+            "example": "2023-11-09"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status da operação",
+            "example": "failed"
+          },
+          "codigo": {
+            "type": "string",
+            "description": "Código associado à operação",
+            "example": "6VJJFDH9VJ"
+          },
+          "pedido_id": {
+            "type": "string",
+            "description": "ID do Pedido associado à operação",
+            "example": "or_6NOe3VrTpT43WrL9"
+          },
+          "metodo_pagamento": {
+            "type": "string",
+            "description": "Método de pagamento utilizado",
+            "example": "credit_card"
+          }
+        },
+        "description": "Detalhes da sua requisição"
+      },
+      "OrderSearchResponse": {
+
       },
       "Error": {
         "required": [
