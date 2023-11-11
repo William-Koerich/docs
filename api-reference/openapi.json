@@ -241,6 +241,44 @@
           }
         }
       }
+    },
+    "/customer/edit": {
+      "post": {
+        "description": "Cria uma nova assinatura",
+        "requestBody": {
+          "description": "Assinatura para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerEditRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerEditResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2057,6 +2095,213 @@
             "description": "Mensagem informativa sobre a operação",
             "type": "string",
             "example": "Cliente gerado com sucesso!"
+          }
+        }
+      },
+      "CustomerEditRequest": {
+        "type": "object",
+        "required": [
+          "cliente_id",
+          "nome",
+          "email",
+          "codigo",
+          "documento",
+          "tipo_documento",
+          "tipo_cliente",
+          "genero",
+          "data_nascimento"
+        ],
+        "properties": {
+          "cliente_id": {
+            "description": "Identificação única do cliente",
+            "type": "string",
+            "example": "cus_5WjRApVfdfx7XKr3"
+          },
+          "nome": {
+            "description": "Nome do cliente",
+            "type": "string",
+            "example": "Peter Parker"
+          },
+          "email": {
+            "description": "Endereço de e-mail do cliente",
+            "type": "string",
+            "example": "parker@avengers.com"
+          },
+          "codigo": {
+            "description": "Código identificador do cliente",
+            "type": "string",
+            "example": "123"
+          },
+          "documento": {
+            "description": "Número do documento do cliente",
+            "type": "string",
+            "example": "10079514944"
+          },
+          "tipo_documento": {
+            "description": "Tipo do documento do cliente",
+            "type": "string",
+            "example": "CPF"
+          },
+          "tipo_cliente": {
+            "description": "Tipo do cliente (ex: individual)",
+            "type": "string",
+            "example": "individual"
+          },
+          "genero": {
+            "description": "Gênero do cliente",
+            "type": "string",
+            "example": "male"
+          },
+          "data_nascimento": {
+            "description": "Data de nascimento do cliente",
+            "type": "string",
+            "format": "date",
+            "example": "2001-01-12"
+          }
+        }
+      },
+      "CustomerEditResponse": {
+        "type": "object",
+        "properties": {
+          "cliente": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Identificação única do cliente",
+                "type": "string",
+                "example": "cus_5WjRApVfdfx7XKr3"
+              },
+              "name": {
+                "description": "Nome do cliente",
+                "type": "string",
+                "example": "Peter Parker"
+              },
+              "email": {
+                "description": "Endereço de e-mail do cliente",
+                "type": "string",
+                "example": "parker@avengers.com"
+              },
+              "code": {
+                "description": "Código identificador do cliente",
+                "type": "string",
+                "example": "123"
+              },
+              "document": {
+                "description": "Número do documento do cliente",
+                "type": "string",
+                "example": "10079514944"
+              },
+              "type": {
+                "description": "Tipo do cliente (ex: individual)",
+                "type": "string",
+                "example": "individual"
+              },
+              "gender": {
+                "description": "Gênero do cliente",
+                "type": "string",
+                "example": "male"
+              },
+              "delinquent": {
+                "description": "Indica se o cliente está inadimplente",
+                "type": "boolean",
+                "example": false
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do endereço",
+                    "type": "string",
+                    "example": "addr_p7P1g7WSZSYgEdYl"
+                  },
+                  "line_1": {
+                    "description": "Primeira linha do endereço",
+                    "type": "string",
+                    "example": "375, Av. General Justo, Centro"
+                  },
+                  "line_2": {
+                    "description": "Segunda linha do endereço",
+                    "type": "string",
+                    "example": "8º andar"
+                  },
+                  "zip_code": {
+                    "description": "Código postal (CEP) do endereço",
+                    "type": "string",
+                    "example": "20021130"
+                  },
+                  "city": {
+                    "description": "Cidade do endereço",
+                    "type": "string",
+                    "example": "Rio de Janeiro"
+                  },
+                  "state": {
+                    "description": "Estado do endereço",
+                    "type": "string",
+                    "example": "RJ"
+                  },
+                  "country": {
+                    "description": "País do endereço",
+                    "type": "string",
+                    "example": "BR"
+                  },
+                  "status": {
+                    "description": "Status do endereço",
+                    "type": "string",
+                    "example": "active"
+                  },
+                  "created_at": {
+                    "description": "Data de criação do endereço",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-06T11:46:09Z"
+                  },
+                  "updated_at": {
+                    "description": "Data de atualização do endereço",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-06T11:46:09Z"
+                  }
+                }
+              },
+              "created_at": {
+                "description": "Data de criação do registro do cliente",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-03T13:48:55Z"
+              },
+              "updated_at": {
+                "description": "Data de atualização do registro do cliente",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-06T20:19:09Z"
+              },
+              "birthdate": {
+                "description": "Data de nascimento do cliente",
+                "type": "string",
+                "format": "date",
+                "example": "2001-01-12"
+              },
+              "phones": {
+                "description": "Informações sobre os telefones do cliente",
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "status": {
+            "description": "Status da resposta",
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "description": "Código de status da resposta",
+            "type": "string",
+            "example": "200"
+          },
+          "message": {
+            "description": "Mensagem da resposta",
+            "type": "string",
+            "example": "Cliente editado com sucesso!"
           }
         }
       },
