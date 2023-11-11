@@ -203,6 +203,44 @@
           }
         }
       }
+    },
+    "/customer/create":  {
+      "post": {
+        "description": "Cria um novo cliente",
+        "requestBody": {
+          "description": "Cliente para ser criado",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1840,6 +1878,188 @@
           }
         }
     },
+      "CustomerRequest": {
+        "required": [
+          "nome",
+          "email",
+          "documento",
+          "tipo_documento",
+          "tipo_cliente",
+          "genero",
+          "code",
+          "nascimento",
+          "ddd",
+          "telefone"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "description": "Nome do cliente",
+            "type": "string",
+            "example": "William Koerich"
+          },
+          "email": {
+            "description": "Endereço de e-mail do cliente",
+            "type": "string",
+            "example": "william.koerich@qu4ttro.com.br"
+          },
+          "documento": {
+            "description": "Número do documento do cliente",
+            "type": "integer",
+            "example": 10079514944
+          },
+          "tipo_documento": {
+            "description": "Tipo do documento (ex: CPF)",
+            "type": "string",
+            "example": "CPF"
+          },
+          "tipo_cliente": {
+            "description": "Tipo do cliente (ex: individual)",
+            "type": "string",
+            "example": "individual"
+          },
+          "genero": {
+            "description": "Gênero do cliente",
+            "type": "string",
+            "example": "male"
+          },
+          "code": {
+            "description": "Código identificador do cliente",
+            "type": "string",
+            "example": "TESTE01"
+          },
+          "nascimento": {
+            "description": "Data de nascimento do cliente (formato: dd/mm/yyyy)",
+            "type": "string",
+            "example": "12/01/2001"
+          },
+          "ddd": {
+            "description": "Código de área do telefone",
+            "type": "string",
+            "example": "47"
+          },
+          "telefone": {
+            "description": "Número do telefone",
+            "type": "string",
+            "example": "996348990"
+          }
+        }
+      },
+      "CustomerResponse": {
+        "type": "object",
+        "properties": {
+          "cliente": {
+            "description": "Detalhes do cliente gerado",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Identificação única do cliente",
+                "type": "string",
+                "example": "cus_b0kYqzNs6soq82dD"
+              },
+              "name": {
+                "description": "Nome do cliente",
+                "type": "string",
+                "example": "William Koerich"
+              },
+              "email": {
+                "description": "Endereço de e-mail do cliente",
+                "type": "string",
+                "example": "william.koerich@qu4ttro.com.br"
+              },
+              "code": {
+                "description": "Código identificador do cliente",
+                "type": "string",
+                "example": "TESTE01"
+              },
+              "document": {
+                "description": "Número do documento do cliente",
+                "type": "string",
+                "example": "10079514944"
+              },
+              "document_type": {
+                "description": "Tipo do documento do cliente",
+                "type": "string",
+                "example": "cpf"
+              },
+              "type": {
+                "description": "Tipo do cliente (ex: individual)",
+                "type": "string",
+                "example": "individual"
+              },
+              "gender": {
+                "description": "Gênero do cliente",
+                "type": "string",
+                "example": "male"
+              },
+              "delinquent": {
+                "description": "Indica se o cliente está inadimplente",
+                "type": "boolean",
+                "example": false
+              },
+              "created_at": {
+                "description": "Data de criação do cliente",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-03T17:29:50Z"
+              },
+              "updated_at": {
+                "description": "Data de atualização do cliente",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-11T12:34:26Z"
+              },
+              "birthdate": {
+                "description": "Data de nascimento do cliente",
+                "type": "string",
+                "format": "date-time",
+                "example": "2001-12-01T00:00:00Z"
+              },
+              "phones": {
+                "description": "Detalhes do telefone do cliente",
+                "type": "object",
+                "properties": {
+                  "mobile_phone": {
+                    "type": "object",
+                    "properties": {
+                      "country_code": {
+                        "description": "Código do país",
+                        "type": "string",
+                        "example": "55"
+                      },
+                      "number": {
+                        "description": "Número do telefone",
+                        "type": "string",
+                        "example": "996348990"
+                      },
+                      "area_code": {
+                        "description": "Código de área do telefone",
+                        "type": "string",
+                        "example": "47"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "description": "Status da operação",
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "description": "Código de resposta",
+            "type": "string",
+            "example": "200"
+          },
+          "message": {
+            "description": "Mensagem informativa sobre a operação",
+            "type": "string",
+            "example": "Cliente gerado com sucesso!"
+          }
+        }
+      },
       "Error": {
         "required": [
           "error",
