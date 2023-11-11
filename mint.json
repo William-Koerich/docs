@@ -47,8 +47,7 @@
       "group": "Clientes",
       "pages": [
         "api-reference/clientes/create",
-        "api-reference/clientes/edit",
-        "api-reference/clientes/list"
+        "api-reference/clientes/edit"
       ]
     },
     {
