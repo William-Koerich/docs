@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Api Stone Docs",
   "logo": {
-    "dark": "/logo/Positivo_Centralizado-Próxima_Santa-Catarina.svg",
-    "light": "/logo/Positivo_Centralizado-Próxima_Santa-Catarina.svg"
+    "dark": "/logo/logo1.png",
+    "light": "/logo/logo1.png"
   },
   "favicon": "/favicon.svg",
   "colors": {
