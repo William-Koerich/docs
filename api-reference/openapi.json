@@ -279,6 +279,44 @@
           }
         }
       }
+    },
+    "/plan/create": {
+      "post": {
+        "description": "Cria uma nova assinatura",
+        "requestBody": {
+          "description": "Assinatura para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2302,6 +2340,172 @@
             "description": "Mensagem da resposta",
             "type": "string",
             "example": "Cliente editado com sucesso!"
+          }
+        }
+      },
+      "PlanRequest": {
+        "type": "object",
+        "required": ["nome", "preco"],
+        "properties": {
+          "nome": {
+            "description": "Nome do plano",
+            "type": "string",
+            "example": "Plano Teste01"
+          },
+          "preco": {
+            "description": "Preço do plano",
+            "type": "number",
+            "example": 200
+          }
+        }
+      },
+      "PlanResponse": {
+        "type": "object",
+        "properties": {
+          "plano": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "ID do plano",
+                "type": "string",
+                "example": "plan_Db9Y5ZaiBiNmZnoL"
+              },
+              "name": {
+                "description": "Nome do plano",
+                "type": "string",
+                "example": "Plano Teste01"
+              },
+              "url": {
+                "description": "URL do plano",
+                "type": "string",
+                "example": "plans/plan_Db9Y5ZaiBiNmZnoL/uniodonto-administradora/plano-teste01"
+              },
+              "interval": {
+                "description": "Intervalo de faturamento",
+                "type": "string",
+                "example": "month"
+              },
+              "interval_count": {
+                "description": "Contagem do intervalo de faturamento",
+                "type": "integer",
+                "example": 1
+              },
+              "billing_type": {
+                "description": "Tipo de faturamento",
+                "type": "string",
+                "example": "prepaid"
+              },
+              "payment_methods": {
+                "description": "Métodos de pagamento aceitos",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["credit_card"]
+              },
+              "installments": {
+                "description": "Número de parcelas",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "example": [1]
+              },
+              "status": {
+                "description": "Status do plano",
+                "type": "string",
+                "example": "active"
+              },
+              "currency": {
+                "description": "Moeda do plano",
+                "type": "string",
+                "example": "BRL"
+              },
+              "created_at": {
+                "description": "Data de criação do plano",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-03T18:26:38Z"
+              },
+              "updated_at": {
+                "description": "Data de atualização do plano",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-03T18:26:38Z"
+              },
+              "items": {
+                "description": "Itens do plano",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "ID do item",
+                      "type": "string",
+                      "example": "pi_kljqwnYTVTkWr1D0"
+                    },
+                    "name": {
+                      "description": "Nome do item",
+                      "type": "string",
+                      "example": "Plano Teste01"
+                    },
+                    "quantity": {
+                      "description": "Quantidade do item",
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "status": {
+                      "description": "Status do item",
+                      "type": "string",
+                      "example": "active"
+                    },
+                    "created_at": {
+                      "description": "Data de criação do item",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-03T18:26:38Z"
+                    },
+                    "updated_at": {
+                      "description": "Data de atualização do item",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-03T18:26:38Z"
+                    },
+                    "pricing_scheme": {
+                      "description": "Esquema de precificação do item",
+                      "type": "object",
+                      "properties": {
+                        "price": {
+                          "description": "Preço do item",
+                          "type": "number",
+                          "example": 200
+                        },
+                        "scheme_type": {
+                          "description": "Tipo de esquema de precificação do item",
+                          "type": "string",
+                          "example": "unit"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "description": "Status da resposta",
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "description": "Código da resposta",
+            "type": "string",
+            "example": "200"
+          },
+          "message": {
+            "description": "Mensagem da resposta",
+            "type": "string",
+            "example": "Plano gerado com sucesso!"
           }
         }
       },
