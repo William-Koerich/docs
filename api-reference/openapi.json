@@ -507,6 +507,44 @@
           }
         }
       }
+    },
+    "/order/cancel": {
+      "delete": {
+        "description": "Cancela um plano",
+        "requestBody": {
+          "description": "Plano para ser cancelado",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderCancelRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderRetryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4022,8 +4060,15 @@
         },
         "description": "Detalhes da sua requisição"
       },
-      "OrderSearchResponse": {
-
+      "OrderCancelRequest": {
+        "type": "object",
+        "properties": {
+          "cobranca_id": {
+            "type": "string",
+            "description": "ID da cobrança",
+            "example": "ch_x7KBdjZCabiAWvVJ"
+          }
+        }
       },
       "Error": {
         "required": [
