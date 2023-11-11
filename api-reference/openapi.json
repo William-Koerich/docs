@@ -357,10 +357,10 @@
       }
     },
     "/plan/delete": {
-      "post": {
-        "description": "Cria uma nova assinatura",
+      "delete": {
+        "description": "Cancela um plano",
         "requestBody": {
-          "description": "Assinatura para ser criada",
+          "description": "Plano para ser cancelado",
           "content": {
             "application/json": {
               "schema": {
@@ -377,6 +377,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlanDeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order/create": {
+      "post": {
+        "description": "Cria uma cobrança",
+        "requestBody": {
+          "description": "Cobrança para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
                 }
               }
             }
@@ -2888,6 +2926,497 @@
           }
         }
       },
+      "OrderRequest": {
+        "type": "object",
+        "properties": {
+          "cliente_id": {
+            "type": "string",
+            "description": "ID do cliente",
+            "example": "cus_b0kYqzNs6soq82dD"
+          },
+          "items": {
+            "type": "object",
+            "properties": {
+              "valor": {
+                "type": "number",
+                "description": "Valor do item",
+                "example": 100
+              },
+              "descricao": {
+                "type": "string",
+                "description": "Descrição do item",
+                "example": "Valor cooparticipação"
+              },
+              "quantidade": {
+                "type": "integer",
+                "description": "Quantidade do item",
+                "example": 1
+              },
+              "codigo": {
+                "type": "string",
+                "description": "Código do item",
+                "example": "123"
+              }
+            },
+            "description": "Detalhes do item a ser pago"
+          },
+          "pagamento": {
+            "type": "object",
+            "properties": {
+              "cartao": {
+                "type": "object",
+                "properties": {
+                  "numero": {
+                    "type": "string",
+                    "description": "Número do cartão",
+                    "example": "5502095668975248"
+                  },
+                  "nome": {
+                    "type": "string",
+                    "description": "Nome do titular do cartão",
+                    "example": "William Koerich"
+                  },
+                  "exp_mes": {
+                    "type": "integer",
+                    "description": "Mês de expiração do cartão",
+                    "example": 7
+                  },
+                  "exp_ano": {
+                    "type": "integer",
+                    "description": "Ano de expiração do cartão",
+                    "example": 29
+                  },
+                  "cvv": {
+                    "type": "integer",
+                    "description": "Código de segurança do cartão",
+                    "example": 723
+                  }
+                },
+                "description": "Detalhes do cartão de crédito"
+              },
+              "parcelas": {
+                "type": "integer",
+                "description": "Número de parcelas",
+                "example": 1
+              },
+              "nome_fatura_cartao": {
+                "type": "string",
+                "description": "Nome que aparecerá na fatura do cartão",
+                "example": "Avengers"
+              },
+              "metodo_pagamento": {
+                "type": "string",
+                "description": "Método de pagamento (ex: credit_card)",
+                "example": "credit_card"
+              }
+            },
+            "description": "Detalhes do pagamento"
+          }
+        }
+      },
+      "OrderResponse": {
+        "type": "object",
+        "properties": {
+          "plano": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID do plano",
+                "example": "or_rBN8j36uVwIz6ZKD"
+              },
+              "code": {
+                "type": "string",
+                "description": "Código do plano",
+                "example": "3QJNU7KAZP"
+              },
+              "amount": {
+                "type": "number",
+                "description": "Valor total do plano em centavos",
+                "example": 100
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda do plano",
+                "example": "BRL"
+              },
+              "closed": {
+                "type": "boolean",
+                "description": "Indica se o plano está fechado",
+                "example": true
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "ID do item",
+                      "example": "oi_AywLrP3hEzfAqpba"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Tipo do item (ex: product)",
+                      "example": "product"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Descrição do item",
+                      "example": "Valor cooparticipação"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "description": "Valor do item em centavos",
+                      "example": 100
+                    },
+                    "quantity": {
+                      "type": "integer",
+                      "description": "Quantidade do item",
+                      "example": 1
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status do item",
+                      "example": "active"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "Data de criação do item",
+                      "example": "2023-11-07T19:03:53Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "Data de atualização do item",
+                      "example": "2023-11-07T19:03:53Z"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Código do item",
+                      "example": "123"
+                    }
+                  },
+                  "description": "Detalhes do item"
+                },
+                "description": "Lista de itens do plano"
+              },
+              "customer": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID do cliente",
+                    "example": "cus_b0kYqzNs6soq82dD"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Nome do cliente",
+                    "example": "William Koerich"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email do cliente",
+                    "example": "william.koerich@qu4ttro.com.br"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "Código do cliente",
+                    "example": "TESTE01"
+                  },
+                  "document": {
+                    "type": "string",
+                    "description": "Número do documento do cliente",
+                    "example": "10079514944"
+                  },
+                  "document_type": {
+                    "type": "string",
+                    "description": "Tipo de documento do cliente",
+                    "example": "cpf"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Tipo de cliente",
+                    "example": "individual"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "description": "Gênero do cliente",
+                    "example": "male"
+                  },
+                  "delinquent": {
+                    "type": "boolean",
+                    "description": "Indica se o cliente está inadimplente",
+                    "example": false
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "Data de criação do cliente",
+                    "example": "2023-11-03T17:29:50Z"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "Data de atualização do cliente",
+                    "example": "2023-11-03T17:29:50Z"
+                  },
+                  "birthdate": {
+                    "type": "string",
+                    "description": "Data de nascimento do cliente",
+                    "example": "2001-12-01T00:00:00Z"
+                  },
+                  "phones": {
+                    "type": "object",
+                    "properties": {},
+                    "description": "Detalhes dos telefones do cliente"
+                  }
+                },
+                "description": "Detalhes do cliente"
+              },
+              "status": {
+                "type": "string",
+                "description": "Status do plano",
+                "example": "failed"
+              },
+              "created_at": {
+                "type": "string",
+                "description": "Data de criação do plano",
+                "example": "2023-11-07T19:03:53Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "Data de atualização do plano",
+                "example": "2023-11-07T19:03:53Z"
+              },
+              "closed_at": {
+                "type": "string",
+                "description": "Data de fechamento do plano",
+                "example": "2023-11-07T19:03:53Z"
+              },
+              "charges": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "ID da cobrança",
+                      "example": "ch_7paJ7e2fVFXNQMnd"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Código da cobrança",
+                      "example": "3QJNU7KAZP"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "description": "Valor da cobrança em centavos",
+                      "example": 100
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status da cobrança",
+                      "example": "failed"
+                    },
+                    "currency": {
+                      "type": "string",
+                      "description": "Moeda da cobrança",
+                      "example": "BRL"
+                    },
+                    "payment_method": {
+                      "type": "string",
+                      "description": "Método de pagamento da cobrança",
+                      "example": "credit_card"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "description": "Data de criação da cobrança",
+                      "example": "2023-11-07T19:03:53Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "description": "Data de atualização da cobrança",
+                      "example": "2023-11-07T19:03:53Z"
+                    },
+                    "customer": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID do cliente",
+                          "example": "cus_b0kYqzNs6soq82dD"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Nome do cliente",
+                          "example": "William Koerich"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "Email do cliente",
+                          "example": "william.koerich@qu4ttro.com.br"
+                        },
+                        "code": {
+                          "type": "string",
+                          "description": "Código do cliente",
+                          "example": "TESTE01"
+                        },
+                        "document": {
+                          "type": "string",
+                          "description": "Número do documento do cliente",
+                          "example": "10079514944"
+                        },
+                        "document_type": {
+                          "type": "string",
+                          "description": "Tipo de documento do cliente",
+                          "example": "cpf"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "Tipo de cliente",
+                          "example": "individual"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "description": "Gênero do cliente",
+                          "example": "male"
+                        },
+                        "delinquent": {
+                          "type": "boolean",
+                          "description": "Indica se o cliente está inadimplente",
+                          "example": false
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "Data de criação do cliente",
+                          "example": "2023-11-03T17:29:50Z"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "description": "Data de atualização do cliente",
+                          "example": "2023-11-03T17:29:50Z"
+                        },
+                        "birthdate": {
+                          "type": "string",
+                          "description": "Data de nascimento do cliente",
+                          "example": "2001-12-01T00:00:00Z"
+                        },
+                        "phones": {
+                          "type": "object",
+                          "properties": {},
+                          "description": "Detalhes dos telefones do cliente"
+                        }
+                      },
+                      "description": "Detalhes do cliente associado à cobrança"
+                    },
+                    "last_transaction": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID da transação",
+                          "example": "tran_amP47rCl3cYb8AGX"
+                        },
+                        "transaction_type": {
+                          "type": "string",
+                          "description": "Tipo da transação",
+                          "example": "credit_card"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "description": "Valor da transação em centavos",
+                          "example": 100
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Status da transação",
+                          "example": "failed"
+                        },
+                        "success": {
+                          "type": "boolean",
+                          "description": "Indica se a transação foi bem-sucedida",
+                          "example": false
+                        },
+                        "operation_type": {
+                          "type": "string",
+                          "description": "Tipo de operação da transação",
+                          "example": "auth_and_capture"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "Data e hora de criação da transação",
+                          "example": "2023-11-07T19:03:53Z"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "description": "Data e hora de última atualização da transação",
+                          "example": "2023-11-07T19:03:53Z"
+                        },
+                        "gateway_response": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "string",
+                              "description": "Código da resposta do gateway",
+                              "example": "412"
+                            },
+                            "errors": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "message": {
+                                    "type": "string",
+                                    "description": "Mensagem de erro",
+                                    "example": "At least one customer phone is required."
+                                  }
+                                }
+                              },
+                              "description": "Lista de erros"
+                            }
+                          },
+                          "description": "Resposta do gateway"
+                        },
+                        "antifraud_response": {
+                          "type": "object",
+                          "description": "Resposta do sistema antifraude"
+                        },
+                        "metadata": {
+                          "type": "object",
+                          "description": "Metadados adicionais da transação"
+                        }
+                      },
+                      "description": "Detalhes da última transação"
+                    }
+                  }
+                }
+              },
+              "checkouts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Detalhes dos checkouts",
+                  "properties": {}
+                },
+                "description": "Lista de checkouts"
+              }
+              }
+              },
+          "status": {
+            "type": "string",
+            "description": "Status da resposta",
+            "example": "success"
+          },
+          "code": {
+            "type": "string",
+            "description": "Código da resposta",
+            "example": "200"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensagem da resposta",
+            "example": "Plano gerado com sucesso!"
+          }
+              }
+              },
       "Error": {
         "required": [
           "error",
