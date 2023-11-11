@@ -20,45 +20,6 @@
   ],
   "paths": {
     "/subscription/create": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "description": "Cria uma nova assinatura",
         "requestBody": {
@@ -115,6 +76,44 @@
           "204": {
             "description": "Plant deleted",
             "content": {}
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscription/search": {
+      "post": {
+        "description": "Busca uma lista de assinatura",
+        "requestBody": {
+          "description": "Filtros para busca",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchSubscriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchSubscriptionResponseSuccess"
+                }
+              }
+            }
           },
           "400": {
             "description": "unexpected error",
@@ -577,6 +576,343 @@
             "$ref": "#/components/schemas/SubscriptionRequest"
           }
         ]
+      },
+      "SearchSubscriptionRequest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Status da assinatura, valores possíveis: active, canceled ou future",
+            "type": "string"
+          },
+            "codigo_assinatura": {
+                "description": "Código da assinatura no sistema da loja. Máx.: 52 caracteres",
+                "type": "string"
+            },
+          "tipo_cobranca": {
+            "description": "Tipo de cobrança, Valores possíveis: prepaid, postpaid ou exact_day.",
+            "type": "string"
+          },
+          "cliente_id": {
+            "description": "Identificação do cliente",
+            "type": "string"
+          },
+          "plano_id": {
+            "description": "Identificação do plano",
+            "type": "string"
+          },
+          "data_inicio_periodo_criacao": {
+            "description": "Data de início da próxima data de cobrança.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "data_final_periodo_criacao": {
+            "description": "Data de término do período de criação",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SearchSubscriptionResponseSuccess": {
+        "description": "Resposta da operação de assinatura",
+        "required": [
+          "assinatura",
+          "status",
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "assinatura": {
+            "description": "Detalhes da assinatura",
+            "type": "object",
+            "properties": {
+              "data": {
+                "description": "Lista de assinaturas",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "Identificação única da assinatura",
+                      "type": "string"
+                    },
+                    "code": {
+                      "description": "Código da assinatura",
+                      "type": "string"
+                    },
+                    "start_at": {
+                      "description": "Data de início da assinatura",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "interval": {
+                      "description": "Intervalo de cobrança",
+                      "type": "string"
+                    },
+                    "interval_count": {
+                      "description": "Número de intervalos",
+                      "type": "integer"
+                    },
+                    "billing_type": {
+                      "description": "Tipo de faturamento",
+                      "type": "string"
+                    },
+                    "current_cycle": {
+                      "description": "Detalhes do ciclo atual",
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "description": "Identificação única do ciclo atual",
+                          "type": "string"
+                        },
+                        "start_at": {
+                          "description": "Data de início do ciclo atual",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "end_at": {
+                          "description": "Data de término do ciclo atual",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "billing_at": {
+                          "description": "Data de faturamento do ciclo atual",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "status": {
+                          "description": "Status do ciclo atual",
+                          "type": "string"
+                        },
+                        "cycle": {
+                          "description": "Número do ciclo",
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "next_billing_at": {
+                      "description": "Próxima data de faturamento",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "payment_method": {
+                      "description": "Método de pagamento",
+                      "type": "string"
+                    },
+                    "currency": {
+                      "description": "Moeda",
+                      "type": "string"
+                    },
+                    "installments": {
+                      "description": "Número de parcelas",
+                      "type": "integer"
+                    },
+                    "minimum_price": {
+                      "description": "Preço mínimo",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "Status da assinatura",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "Data de criação da assinatura",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated_at": {
+                      "description": "Data de atualização da assinatura",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "customer": {
+                      "description": "Detalhes do cliente",
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "description": "Identificação única do cliente",
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "Nome do cliente",
+                          "type": "string"
+                        },
+                        "email": {
+                          "description": "Endereço de e-mail do cliente",
+                          "type": "string"
+                        },
+                        "code": {
+                          "description": "Código do cliente",
+                          "type": "string"
+                        },
+                        "document": {
+                          "description": "Número do documento do cliente",
+                          "type": "string"
+                        },
+                        "document_type": {
+                          "description": "Tipo de documento do cliente",
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Tipo de cliente",
+                          "type": "string"
+                        },
+                        "gender": {
+                          "description": "Gênero do cliente",
+                          "type": "string"
+                        },
+                        "delinquent": {
+                          "description": "Indica se o cliente está inadimplente",
+                          "type": "boolean"
+                        },
+                        "created_at": {
+                          "description": "Data de criação do cliente",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updated_at": {
+                          "description": "Data de atualização do cliente",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "birthdate": {
+                          "description": "Data de nascimento do cliente",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "phones": {
+                          "description": "Detalhes dos telefones do cliente",
+                          "type": "object"
+                        }
+                      }
+                    },
+                    "card": {
+                      "description": "Detalhes do cartão de crédito",
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "description": "Identificação única do cartão",
+                          "type": "string"
+                        },
+                        "first_six_digits": {
+                          "description": "Primeiros seis dígitos do cartão",
+                          "type": "string"
+                        },
+                        "last_four_digits": {
+                          "description": "Últimos quatro dígitos do cartão",
+                          "type": "string"
+                        },
+                        "brand": {
+                          "description": "Bandeira do cartão",
+                          "type": "string"
+                        },
+                        "holder_name": {
+                          "description": "Nome do titular do cartão",
+                          "type": "string"
+                        },
+                        "exp_month": {
+                          "description": "Mês de expiração do cartão",
+                          "type": "integer"
+                        },
+                        "exp_year": {
+                          "description": "Ano de expiração do cartão",
+                          "type": "integer"
+                        },
+                        "status": {
+                          "description": "Status do cartão",
+                          "type": "string"
+                        },
+                        "type": {
+                          "description": "Tipo de cartão",
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "description": "Data de criação do cartão",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updated_at": {
+                          "description": "Data de atualização do cartão",
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "items": {
+                      "description": "Itens incluídos na assinatura",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "description": "Identificação única do item",
+                            "type": "string"
+                          },
+                          "description": {
+                            "description": "Descrição do item",
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "description": "Quantidade do item",
+                            "type": "integer"
+                          },
+                          "status": {
+                            "description": "Status do item",
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "description": "Data de criação do item",
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updated_at": {
+                            "description": "Data de atualização do item",
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "pricing_scheme": {
+                            "description": "Esquema de precificação do item",
+                            "type": "object",
+                            "properties": {
+                              "price": {
+                                "description": "Preço do item",
+                                "type": "integer"
+                              },
+                              "minimum_price": {
+                                "description": "Preço mínimo do item",
+                                "type": "integer"
+                              },
+                              "scheme_type": {
+                                "description": "Tipo de esquema de precificação",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "boleto": {
+                      "description": "Detalhes do boleto, se aplicável",
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "description": "Status da operação",
+            "type": "string"
+          },
+          "code": {
+            "description": "Código da operação",
+            "type": "string"
+          },
+          "message": {
+            "description": "Mensagem descritiva da operação",
+            "type": "string"
+          }
+        }
       },
       "Error": {
         "required": [
