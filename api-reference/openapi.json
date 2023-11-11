@@ -127,6 +127,44 @@
           }
         }
       }
+    },
+    "/subscription/withoutplan": {
+      "post": {
+        "description": "Cria uma nova assinatura sem plano",
+        "requestBody": {
+          "description": "Assinatura para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubscriptionWithoutPlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionWithoutPlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -911,6 +949,425 @@
           "message": {
             "description": "Mensagem descritiva da operação",
             "type": "string"
+          }
+        }
+      },
+      "SubscriptionWithoutPlanRequest": {
+        "required": [
+          "cartao",
+          "preco",
+          "installments",
+          "metodo_pagamento",
+          "cliente_id",
+          "codigo",
+          "descricao"
+        ],
+        "type": "object",
+        "properties": {
+          "cartao": {
+            "description": "Detalhes do cartão de crédito",
+            "type": "object",
+            "properties": {
+              "numero": {
+                "description": "Número do cartão",
+                "type": "string"
+              },
+              "nome": {
+                "description": "Nome do titular do cartão",
+                "type": "string"
+              },
+              "exp_mes": {
+                "description": "Mês de expiração do cartão",
+                "type": "string"
+              },
+              "exp_ano": {
+                "description": "Ano de expiração do cartão",
+                "type": "string"
+              },
+              "cvv": {
+                "description": "Código de segurança do cartão",
+                "type": "string"
+              }
+            }
+          },
+          "preco": {
+            "description": "Detalhes do preço",
+            "type": "object",
+            "properties": {
+              "tipo": {
+                "description": "Tipo de preço",
+                "type": "string"
+              },
+              "valor": {
+                "description": "Valor do preço",
+                "type": "integer"
+              }
+            }
+          },
+          "installments": {
+            "description": "Número de parcelas",
+            "type": "string"
+          },
+          "metodo_pagamento": {
+            "description": "Método de pagamento",
+            "type": "string"
+          },
+          "cliente_id": {
+            "description": "Identificação única do cliente",
+            "type": "string"
+          },
+          "codigo": {
+            "description": "Código da transação",
+            "type": "string"
+          },
+          "descricao": {
+            "description": "Descrição da transação",
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionWithoutPlanResponse": {
+        "description": "Resposta da operação de assinatura",
+        "required": ["assinatura", "status", "code", "message"],
+        "type": "object",
+        "properties": {
+          "assinatura": {
+            "description": "Detalhes da assinatura",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Identificação única da assinatura",
+                "type": "string",
+                "example": "sub_vq8Ok9eTKTRkQ90e"
+              },
+              "code": {
+                "description": "Código da assinatura",
+                "type": "string",
+                "example": "sdfsf"
+              },
+              "start_at": {
+                "description": "Data de início da assinatura",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-06T00:00:00Z"
+              },
+              "interval": {
+                "description": "Intervalo de cobrança",
+                "type": "string",
+                "example": "month"
+              },
+              "interval_count": {
+                "description": "Número de intervalos",
+                "type": "integer",
+                "example": 1
+              },
+              "billing_type": {
+                "description": "Tipo de faturamento",
+                "type": "string",
+                "example": "prepaid"
+              },
+              "current_cycle": {
+                "description": "Detalhes do ciclo atual",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do ciclo atual",
+                    "type": "string",
+                    "example": "cycle_4kOmBaDiLi75vXVP"
+                  },
+                  "start_at": {
+                    "description": "Data de início do ciclo atual",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-06T00:00:00Z"
+                  },
+                  "end_at": {
+                    "description": "Data de término do ciclo atual",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-12-05T23:59:59Z"
+                  },
+                  "billing_at": {
+                    "description": "Data de faturamento do ciclo atual",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-06T00:00:00Z"
+                  },
+                  "status": {
+                    "description": "Status do ciclo atual",
+                    "type": "string",
+                    "example": "billed"
+                  },
+                  "cycle": {
+                    "description": "Número do ciclo",
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              },
+              "next_billing_at": {
+                "description": "Próxima data de faturamento",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-12-06T00:00:00Z"
+              },
+              "payment_method": {
+                "description": "Método de pagamento",
+                "type": "string",
+                "example": "credit_card"
+              },
+              "currency": {
+                "description": "Moeda",
+                "type": "string",
+                "example": "BRL"
+              },
+              "installments": {
+                "description": "Número de parcelas",
+                "type": "integer",
+                "example": 1
+              },
+              "minimum_price": {
+                "description": "Preço mínimo",
+                "type": "integer",
+                "example": 100
+              },
+              "status": {
+                "description": "Status da assinatura",
+                "type": "string",
+                "example": "failed"
+              },
+              "created_at": {
+                "description": "Data de criação da assinatura",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-06T19:43:19Z"
+              },
+              "updated_at": {
+                "description": "Data de atualização da assinatura",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-06T19:43:19Z"
+              },
+              "customer": {
+                "description": "Detalhes do cliente",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do cliente",
+                    "type": "string",
+                    "example": "cus_b0kYqzNs6soq82dD"
+                  },
+                  "name": {
+                    "description": "Nome do cliente",
+                    "type": "string",
+                    "example": "William Koerich"
+                  },
+                  "email": {
+                    "description": "Endereço de e-mail do cliente",
+                    "type": "string",
+                    "example": "william.koerich@qu4ttro.com.br"
+                  },
+                  "code": {
+                    "description": "Código do cliente",
+                    "type": "string",
+                    "example": "TESTE01"
+                  },
+                  "document": {
+                    "description": "Número do documento do cliente",
+                    "type": "string",
+                    "example": "10079514944"
+                  },
+                  "document_type": {
+                    "description": "Tipo de documento do cliente",
+                    "type": "string",
+                    "example": "cpf"
+                  },
+                  "type": {
+                    "description": "Tipo de cliente",
+                    "type": "string",
+                    "example": "individual"
+                  },
+                  "gender": {
+                    "description": "Gênero do cliente",
+                    "type": "string",
+                    "example": "male"
+                  },
+                  "delinquent": {
+                    "description": "Indica se o cliente está inadimplente",
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "created_at": {
+                    "description": "Data de criação do cliente",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-03T17:29:50Z"
+                  },
+                  "updated_at": {
+                    "description": "Data de atualização do cliente",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-03T17:29:50Z"
+                  },
+                  "birthdate": {
+                    "description": "Data de nascimento do cliente",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2001-12-01T00:00:00Z"
+                  },
+                  "phones": {
+                    "description": "Detalhes dos telefones do cliente",
+                    "type": "object",
+                    "example": {}
+                  }
+                }
+              },
+              "card": {
+                "description": "Detalhes do cartão de crédito",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "Identificação única do cartão",
+                    "type": "string",
+                    "example": "card_5jbVE0zI5IVZm7pR"
+                  },
+                  "first_six_digits": {
+                    "description": "Primeiros seis dígitos do cartão",
+                    "type": "string",
+                    "example": "550209"
+                  },
+                  "last_four_digits": {
+                    "description": "Últimos quatro dígitos do cartão",
+                    "type": "string",
+                    "example": "5248"
+                  },
+                  "brand": {
+                    "description": "Bandeira do cartão",
+                    "type": "string",
+                    "example": "Mastercard"
+                  },
+                  "holder_name": {
+                    "description": "Nome do titular do cartão",
+                    "type": "string",
+                    "example": "William Koerich"
+                  },
+                  "exp_month": {
+                    "description": "Mês de expiração do cartão",
+                    "type": "integer",
+                    "example": 7
+                  },
+                  "exp_year": {
+                    "description": "Ano de expiração do cartão",
+                    "type": "integer",
+                    "example": 2029
+                  },
+                  "status": {
+                    "description": "Status do cartão",
+                    "type": "string",
+                    "example": "active"
+                  },
+                  "type": {
+                    "description": "Tipo de cartão",
+                    "type": "string",
+                    "example": "credit"
+                  },
+                  "created_at": {
+                    "description": "Data de criação do cartão",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-03T18:49:36Z"
+                  },
+                  "updated_at": {
+                    "description": "Data de atualização do cartão",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-11-06T19:43:19Z"
+                  }
+                }
+              },
+              "items": {
+                "description": "Itens incluídos na assinatura",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "Identificação única do item",
+                      "type": "string",
+                      "example": "si_XPdWRQVTqTon5kw4"
+                    },
+                    "description": {
+                      "description": "Descrição do item",
+                      "type": "string",
+                      "example": "asfsedgbusd0fpgshdfyo vsdfifdvui"
+                    },
+                    "quantity": {
+                      "description": "Quantidade do item",
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "status": {
+                      "description": "Status do item",
+                      "type": "string",
+                      "example": "active"
+                    },
+                    "created_at": {
+                      "description": "Data de criação do item",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-06T19:43:19Z"
+                    },
+                    "updated_at": {
+                      "description": "Data de atualização do item",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-06T19:43:19Z"
+                    },
+                    "pricing_scheme": {
+                      "description": "Esquema de precificação do item",
+                      "type": "object",
+                      "properties": {
+                        "price": {
+                          "description": "Preço do item",
+                          "type": "integer",
+                          "example": 100000000
+                        },
+                        "minimum_price": {
+                          "description": "Preço mínimo do item",
+                          "type": "integer",
+                          "example": 100
+                        },
+                        "scheme_type": {
+                          "description": "Tipo de esquema de precificação",
+                          "type": "string",
+                          "example": "unit"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "boleto": {
+                "description": "Detalhes do boleto, se aplicável",
+                "type": "object",
+                "example": {}
+              }
+            }
+          },
+          "status": {
+            "description": "Status da operação",
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "description": "Código da operação",
+            "type": "string",
+            "example": "200"
+          },
+          "message": {
+            "description": "Mensagem descritiva da operação",
+            "type": "string",
+            "example": "Assinatura sem plano criada com sucesso!"
           }
         }
       },
