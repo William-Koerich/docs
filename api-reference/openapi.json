@@ -431,6 +431,44 @@
           }
         }
       }
+    },
+    "/order/retry": {
+      "post": {
+        "description": "Cria uma cobrança",
+        "requestBody": {
+          "description": "Cobrança para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRetryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderRetryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3417,6 +3455,492 @@
           }
               }
               },
+      "OrderRetryRequest": {
+        "type": "object",
+        "properties": {
+          "cobranca_id": {
+            "type": "string",
+            "description": "ID da cobrança",
+            "example": "ch_aAMD3ABjcOfOlkEW"
+          }
+        }
+      },
+      "OrderRetryResponse": {
+        "type": "object",
+        "properties": {
+          "cobranca": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID da cobrança",
+                "example": "ch_aAMD3ABjcOfOlkEW"
+              },
+              "code": {
+                "type": "string",
+                "description": "Código da cobrança",
+                "example": "Z92BD7IY4X"
+              },
+              "gateway_id": {
+                "type": "string",
+                "description": "ID do gateway",
+                "example": "1992971254"
+              },
+              "amount": {
+                "type": "integer",
+                "description": "Valor da cobrança",
+                "example": 100
+              },
+              "paid_amount": {
+                "type": "integer",
+                "description": "Valor pago",
+                "example": 100
+              },
+              "status": {
+                "type": "string",
+                "description": "Status da cobrança",
+                "example": "paid"
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda da cobrança",
+                "example": "BRL"
+              },
+              "payment_method": {
+                "type": "string",
+                "description": "Método de pagamento",
+                "example": "credit_card"
+              },
+              "paid_at": {
+                "type": "string",
+                "description": "Data do pagamento",
+                "example": "2023-11-11T19:04:33Z"
+              },
+              "created_at": {
+                "type": "string",
+                "description": "Data de criação da cobrança",
+                "example": "2023-11-08T18:27:59Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "description": "Data de última atualização da cobrança",
+                "example": "2023-11-11T19:04:33Z"
+              },
+              "order": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID do pedido",
+                    "example": "or_vx12VMcQ0Tv1NL4p"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "Código do pedido",
+                    "example": "Z92BD7IY4X"
+                  },
+                  "amount": {
+                    "type": "integer",
+                    "description": "Valor do pedido",
+                    "example": 100
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "Data de criação do pedido",
+                    "example": "2023-11-08T18:27:59Z"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "Data de última atualização do pedido",
+                    "example": "2023-11-11T19:04:33Z"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "description": "Moeda do pedido",
+                    "example": "BRL"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Status do pedido",
+                    "example": "pending"
+                  },
+                  "customer_id": {
+                    "type": "string",
+                    "description": "ID do cliente",
+                    "example": "cus_4gqDvKnsMHDx6PV3"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "ID do item",
+                          "example": "oi_MJ89veAhQCwmKeDz"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Descrição do item",
+                          "example": "Valor cooparticipação"
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "description": "Valor do item",
+                          "example": 100
+                        },
+                        "quantity": {
+                          "type": "integer",
+                          "description": "Quantidade do item",
+                          "example": 1
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Status do item",
+                          "example": "active"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "customer": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID do cliente",
+                    "example": "cus_4gqDvKnsMHDx6PV3"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Nome do cliente",
+                    "example": "Tony Stark"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "E-mail do cliente",
+                    "example": "tonystarkk@avengers.com"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "Código do cliente",
+                    "example": "MY_CUSTOMER_001"
+                  },
+                  "document": {
+                    "type": "string",
+                    "description": "Documento do cliente",
+                    "example": "93095135270"
+                  },
+                  "document_type": {
+                    "type": "string",
+                    "description": "Tipo de documento do cliente",
+                    "example": "cpf"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Tipo de cliente",
+                    "example": "individual"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "description": "Gênero do cliente",
+                    "example": "male"
+                  },
+                  "delinquent": {
+                    "type": "boolean",
+                    "description": "Inadimplência do cliente",
+                    "example": false
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "Data de criação do cliente",
+                    "example": "2023-11-07T20:28:27Z"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "Data de última atualização do cliente",
+                    "example": "2023-11-07T20:28:27Z"
+                  },
+                  "birthdate": {
+                    "type": "string",
+                    "description": "Data de nascimento do cliente",
+                    "example": "2001-01-12T00:00:00Z"
+                  },
+                  "phones": {
+                    "type": "object",
+                    "properties": {
+                      "mobile_phone": {
+                        "type": "object",
+                        "properties": {
+                          "country_code": {
+                            "type": "string",
+                            "description": "Código do país",
+                            "example": "55"
+                          },
+                          "number": {
+                            "type": "string",
+                            "description": "Número do telefone",
+                            "example": "000000000"
+                          },
+                          "area_code": {
+                            "type": "string",
+                            "description": "Código de área",
+                            "example": "21"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "last_transaction": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID da última transação",
+                    "example": "tran_lDK10j8IqImZ94ro"
+                  },
+                  "transaction_type": {
+                    "type": "string",
+                    "description": "Tipo de transação",
+                    "example": "credit_card"
+                  },
+                  "gateway_id": {
+                    "type": "string",
+                    "description": "ID do gateway da transação",
+                    "example": "1992971254"
+                  },
+                  "amount": {
+                    "type": "integer",
+                    "description": "Valor da transação",
+                    "example": 100
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Status da transação",
+                    "example": "captured"
+                  },
+                  "success": {
+                    "type": "boolean",
+                    "description": "Sucesso da transação",
+                    "example": true
+                  },
+                  "installments": {
+                    "type": "integer",
+                    "description": "Número de parcelas",
+                    "example": 1
+                  },
+                  "statement_descriptor": {
+                    "type": "string",
+                    "description": "Descrição na fatura do cartão",
+                    "example": "Avengers"
+                  },
+                  "acquirer_name": {
+                    "type": "string",
+                    "description": "Nome do adquirente",
+                    "example": "pagarme"
+                  },
+                  "acquirer_tid": {
+                    "type": "string",
+                    "description": "ID da transação no adquirente",
+                    "example": "1992971254"
+                  },
+                  "acquirer_nsu": {
+                    "type": "string",
+                    "description": "NSU do adquirente",
+                    "example": "1992971254"
+                  },
+                  "acquirer_auth_code": {
+                    "type": "string",
+                    "description": "Código de autorização do adquirente",
+                    "example": "090390"
+                  },
+                  "acquirer_message": {
+                    "type": "string",
+                    "description": "Mensagem do adquirente",
+                    "example": "Transação aprovada com sucesso"
+                  },
+                  "acquirer_return_code": {
+                    "type": "string",
+                    "description": "Código de retorno do adquirente",
+                    "example": "0000"
+                  },
+                  "operation_type": {
+                    "type": "string",
+                    "description": "Tipo de operação",
+                    "example": "auth_and_capture"
+                  },
+                  "card": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "ID do cartão",
+                        "example": "card_6nBe8wyU3UjWVEaR"
+                      },
+                      "first_six_digits": {
+                        "type": "string",
+                        "description": "Primeiros seis dígitos do cartão",
+                        "example": "550209"
+                      },
+                      "last_four_digits": {
+                        "type": "string",
+                        "description": "Últimos quatro dígitos do cartão",
+                        "example": "5248"
+                      },
+                      "brand": {
+                        "type": "string",
+                        "description": "Bandeira do cartão",
+                        "example": "Mastercard"
+                      },
+                      "holder_name": {
+                        "type": "string",
+                        "description": "Nome do titular do cartão",
+                        "example": "William Koerich"
+                      },
+                      "exp_month": {
+                        "type": "integer",
+                        "description": "Mês de expiração do cartão",
+                        "example": 7
+                      },
+                      "exp_year": {
+                        "type": "integer",
+                        "description": "Ano de expiração do cartão",
+                        "example": 2029
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Status do cartão",
+                        "example": "active"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "Tipo do cartão",
+                        "example": "credit"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "Data de criação do cartão",
+                        "example": "2023-11-08T12:48:13Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "description": "Data de última atualização do cartão",
+                        "example": "2023-11-09T12:50:55Z"
+                      },
+                      "billing_address": {
+                        "type": "object",
+                        "properties": {
+                          "zip_code": {
+                            "type": "string",
+                            "description": "CEP do endereço de cobrança",
+                            "example": "90265"
+                          },
+                          "city": {
+                            "type": "string",
+                            "description": "Cidade do endereço de cobrança",
+                            "example": "Malibu"
+                          },
+                          "state": {
+                            "type": "string",
+                            "description": "Estado do endereço de cobrança",
+                            "example": "CA"
+                          },
+                          "country": {
+                            "type": "string",
+                            "description": "País do endereço de cobrança",
+                            "example": "US"
+                          },
+                          "line_1": {
+                            "type": "string",
+                            "description": "Linha 1 do endereço de cobrança",
+                            "example": "Av. Brigadeiro Faria Lima"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "funding_source": {
+                    "type": "string",
+                    "description": "Fonte de financiamento",
+                    "example": "credit"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "description": "Data de criação",
+                    "example": "2023-11-11T19:04:28Z"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "description": "Data de última atualização",
+                    "example": "2023-11-11T19:04:28Z"
+                  },
+                  "gateway_response": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "description": "Código da resposta",
+                        "example": "200"
+                      },
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Lista de erros"
+                      }
+                    },
+                    "description": "Resposta do gateway"
+                  },
+                  "antifraud_response": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "description": "Status da resposta antifraude",
+                        "example": "approved"
+                      },
+                      "score": {
+                        "type": "string",
+                        "description": "Pontuação da resposta antifraude",
+                        "example": "moderated"
+                      },
+                      "provider_name": {
+                        "type": "string",
+                        "description": "Nome do provedor antifraude",
+                        "example": "pagarme"
+                      }
+                    },
+                    "description": "Resposta antifraude"
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "description": "Metadados adicionais"
+                  }
+                }
+              }
+            }
+          },
+            "status": {
+                "type": "string",
+                "description": "Status da resposta",
+                "example": "success"
+            },
+            "code": {
+                "type": "string",
+                "description": "Código da resposta",
+                "example": "200"
+            },
+            "message": {
+                "type": "string",
+                "description": "Mensagem da resposta",
+                "example": "Cobrança reprocessada com sucesso!"
+            }
+        }
+      },
       "Error": {
         "required": [
           "error",

@@ -62,7 +62,6 @@
       "group": "Pedidos",
       "pages": [
         "api-reference/pedidos/create",
-        "api-reference/pedidos/charge",
         "api-reference/pedidos/retry",
         "api-reference/pedidos/list",
         "api-reference/pedidos/cancelcharge"
@@ -74,14 +73,6 @@
         "api-reference/checkout/get",
         "api-reference/checkout/create",
         "api-reference/checkout/delete"
-      ]
-    },
-    {
-      "group": "Cartão",
-      "pages": [
-        "api-reference/cartao/get",
-        "api-reference/cartao/create",
-        "api-reference/cartao/delete"
       ]
     }
   ]
