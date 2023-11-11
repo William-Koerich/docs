@@ -317,6 +317,44 @@
           }
         }
       }
+    },
+    "/plan/edit": {
+      "post": {
+        "description": "Cria uma nova assinatura",
+        "requestBody": {
+          "description": "Assinatura para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanEditRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanEditResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2353,7 +2391,7 @@
             "example": "Plano Teste01"
           },
           "preco": {
-            "description": "Preço do plano",
+            "description": "Preço do plano em centavos",
             "type": "number",
             "example": 200
           }
@@ -2476,7 +2514,7 @@
                       "type": "object",
                       "properties": {
                         "price": {
-                          "description": "Preço do item",
+                          "description": "Preço do item em centavos",
                           "type": "number",
                           "example": 200
                         },
@@ -2506,6 +2544,202 @@
             "description": "Mensagem da resposta",
             "type": "string",
             "example": "Plano gerado com sucesso!"
+          }
+        }
+      },
+      "PlanEditRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "description": "Nome do plano Silver",
+            "type": "string",
+            "example": "Plano Silver"
+          },
+          "plano_id": {
+            "description": "ID do plano associado",
+            "type": "string",
+            "example": "plan_Db9Y5ZaiBiNmZnoL"
+          },
+          "status": {
+            "description": "Status do plano Silver",
+            "type": "string",
+            "example": "active"
+          },
+          "preco": {
+            "description": "Preço do plano em centavos",
+            "type": "integer",
+            "example": 100000
+          },
+          "dia_pagamento": {
+            "description": "Dia de pagamento do plano Silver",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [25]
+          }
+        }
+      },
+      "PlanEditResponse": {
+        "type": "object",
+        "properties": {
+          "plano": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "ID do plano Silver",
+                "type": "string",
+                "example": "plan_Db9Y5ZaiBiNmZnoL"
+              },
+              "name": {
+                "description": "Nome do plano Silver",
+                "type": "string",
+                "example": "Plano Silver"
+              },
+              "url": {
+                "description": "URL do plano Silver",
+                "type": "string",
+                "example": "plans/plan_Db9Y5ZaiBiNmZnoL/uniodonto-administradora/plano-silver"
+              },
+              "minimum_price": {
+                "description": "Preço mínimo do plano em centavos",
+                "type": "integer",
+                "example": 100000
+              },
+              "interval": {
+                "description": "Tipo de intervalo de pagamento",
+                "type": "string",
+                "example": "month"
+              },
+              "interval_count": {
+                "description": "Número de intervalos de pagamento",
+                "type": "integer",
+                "example": 1
+              },
+              "billing_type": {
+                "description": "Tipo de cobrança",
+                "type": "string",
+                "example": "exact_day"
+              },
+              "billing_days": {
+                "description": "Dias de cobrança do plano Silver",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "example": [25]
+              },
+              "payment_methods": {
+                "description": "Métodos de pagamento aceitos",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["credit_card"]
+              },
+              "installments": {
+                "description": "Número de parcelas permitidas",
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "example": [1]
+              },
+              "status": {
+                "description": "Status do plano Silver",
+                "type": "string",
+                "example": "active"
+              },
+              "currency": {
+                "description": "Moeda do plano",
+                "type": "string",
+                "example": "BRL"
+              },
+              "created_at": {
+                "description": "Data de criação do plano",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-03T18:26:38Z"
+              },
+              "updated_at": {
+                "description": "Data de atualização do plano",
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-11-06T17:59:24Z"
+              },
+              "items": {
+                "description": "Itens associados ao plano Silver",
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "ID do item associado ao plano",
+                      "type": "string",
+                      "example": "pi_kljqwnYTVTkWr1D0"
+                    },
+                    "name": {
+                      "description": "Nome do item associado ao plano",
+                      "type": "string",
+                      "example": "Plano Teste01"
+                    },
+                    "quantity": {
+                      "description": "Quantidade do item associado ao plano",
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "status": {
+                      "description": "Status do item associado ao plano",
+                      "type": "string",
+                      "example": "active"
+                    },
+                    "created_at": {
+                      "description": "Data de criação do item associado ao plano",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-03T18:26:38Z"
+                    },
+                    "updated_at": {
+                      "description": "Data de atualização do item associado ao plano",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-03T18:26:38Z"
+                    },
+                    "pricing_scheme": {
+                      "description": "Esquema de precificação do item associado ao plano",
+                      "type": "object",
+                      "properties": {
+                        "price": {
+                          "description": "Preço do item em centavos",
+                          "type": "integer",
+                          "example": 200
+                        },
+                        "scheme_type": {
+                          "description": "Tipo de esquema de precificação do item",
+                          "type": "string",
+                          "example": "unit"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "description": "Status da operação",
+            "type": "string",
+            "example": "success"
+          },
+          "code": {
+            "description": "Código da resposta",
+            "type": "string",
+            "example": "200"
+          },
+          "message": {
+            "description": "Mensagem da operação",
+            "type": "string",
+            "example": "Plano editado com sucesso!"
           }
         }
       },
