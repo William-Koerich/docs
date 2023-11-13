@@ -4193,6 +4193,9 @@
         "description": "Detalhes da sua requisição"
       },
       "OrderCancelRequest": {
+        "required": [
+          "cobranca_id"
+        ],
         "type": "object",
         "properties": {
           "cobranca_id": {
