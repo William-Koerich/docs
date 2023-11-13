@@ -3057,6 +3057,7 @@
         }
       },
       "PlanDeleteRequest": {
+        "required": ["plano_id"],
         "type": "object",
         "properties": {
           "plano_id": {
