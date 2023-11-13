@@ -3206,6 +3206,12 @@
                 "example": "123"
               }
             },
+            "example": {
+              "valor": 100,
+              "descricao": "Valor cooparticipação",
+              "quantidade": 1,
+              "codigo": "123"
+            },
             "description": "Detalhes do item a ser pago"
           },
           "pagamento": {
@@ -3258,21 +3264,8 @@
                 "example": "credit_card"
               }
             },
-            "description": "Detalhes do pagamento",
-            "example": {
-              "cartao": {
-                "numero": "5502095668975248",
-                "nome": "William Koerich",
-                "exp_mes": 7,
-                "exp_ano": 29,
-                "cvv": 723
-              },
-              "parcelas": 1,
-              "nome_fatura_cartao": "Avengers",
-              "metodo_pagamento": "credit_card"
-            }
+            "description": "Detalhes do pagamento"
           }
-
         }
       },
       "OrderResponse": {
