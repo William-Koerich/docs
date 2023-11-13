@@ -3260,12 +3260,14 @@
             },
             "description": "Detalhes do pagamento",
             "example": {
-              "cartao": {
-                "numero": "5502095668975248",
-                "nome": "William Koerich",
-                "exp_mes": 7,
-                "exp_ano": 29,
-                "cvv": 723
+              "pagamento": {
+                "cartao": {
+                  "numero": "5502095668975248",
+                  "nome": "William Koerich",
+                  "exp_mes": 7,
+                  "exp_ano": 29,
+                  "cvv": 723
+                }
               },
               "parcelas": 1,
               "nome_fatura_cartao": "Avengers",
