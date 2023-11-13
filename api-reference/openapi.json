@@ -653,28 +653,34 @@
             "properties": {
               "id": {
                 "description": "Identificação única da assinatura",
-                "type": "string"
+                "type": "string",
+                "example": "sub_42KejYeCqC8j9zby"
               },
               "code": {
-                "description": "Código da assinatura",
-                "type": "string"
+                "description": "Código da assinatura no sistema uniodonto",
+                "type": "string",
+                "example": "integral_8109"
               },
               "start_at": {
                 "description": "Data de início da assinatura",
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "example": "2023-11-03T00:00:00Z"
               },
               "interval": {
                 "description": "Intervalo de cobrança",
-                "type": "string"
+                "type": "string",
+                "example": "month"
               },
               "interval_count": {
                 "description": "Número de intervalos",
-                "type": "integer"
+                "type": "integer",
+                "example": 1
               },
               "billing_type": {
                 "description": "Tipo de faturamento",
-                "type": "string"
+                "type": "string",
+                "example": "prepaid"
               },
               "current_cycle": {
                 "description": "Detalhes do ciclo atual",
@@ -682,63 +688,76 @@
                 "properties": {
                   "id": {
                     "description": "Identificação única do ciclo atual",
-                    "type": "string"
+                    "type": "string",
+                    "example": "cycle_GOMeZaDH4HBR5Wkx"
                   },
                   "start_at": {
                     "description": "Data de início do ciclo atual",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T00:00:00Z"
                   },
                   "end_at": {
                     "description": "Data de término do ciclo atual",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T00:00:00Z"
                   },
                   "billing_at": {
                     "description": "Data de faturamento do ciclo atual",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T00:00:00Z"
                   },
                   "status": {
                     "description": "Status do ciclo atual",
-                    "type": "string"
+                    "type": "string",
+                    "example": "billed"
                   },
                   "cycle": {
                     "description": "Número do ciclo",
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1
                   }
                 }
               },
               "next_billing_at": {
                 "description": "Próxima data de faturamento",
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "example": "2023-11-03T00:00:00Z"
               },
               "payment_method": {
                 "description": "Método de pagamento",
-                "type": "string"
+                "type": "string",
+                "example": "credit_card"
               },
               "currency": {
                 "description": "Moeda",
-                "type": "string"
+                "type": "string",
+                "example": "BRL"
               },
               "installments": {
                 "description": "Número de parcelas",
-                "type": "integer"
+                "type": "integer",
+                "example": 1
               },
               "status": {
                 "description": "Status da assinatura",
-                "type": "string"
+                "type": "string",
+                "example": "failed"
               },
               "created_at": {
                 "description": "Data de criação da assinatura",
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "example": "2023-11-03T00:00:00Z"
               },
               "updated_at": {
                 "description": "Data de atualização da assinatura",
                 "type": "string",
-                "format": "date-time"
+                "format": "date-time",
+                "example": "2023-11-03T00:00:00Z"
               },
               "customer": {
                 "description": "Detalhes do cliente",
@@ -746,54 +765,66 @@
                 "properties": {
                   "id": {
                     "description": "Identificação única do cliente",
-                    "type": "string"
+                    "type": "string",
+                    "example": "cus_5WjRApVfdfx7XKr3"
                   },
                   "name": {
                     "description": "Nome do cliente",
-                    "type": "string"
+                    "type": "string",
+                    "example": "William Koerich"
                   },
                   "email": {
                     "description": "Endereço de e-mail do cliente",
-                    "type": "string"
+                    "type": "string",
+                    "example": "william.koerich@qu4ttro.com.br"
                   },
                   "code": {
-                    "description": "Código do cliente",
-                    "type": "string"
+                    "description": "Código do cliente no sistema Uniodonto",
+                    "type": "string",
+                    "example": "USU6534"
                   },
                   "document": {
                     "description": "Número do documento do cliente",
-                    "type": "string"
+                    "type": "string",
+                    "example": "12345678900"
                   },
                   "document_type": {
                     "description": "Tipo de documento do cliente",
-                    "type": "string"
+                    "type": "string",
+                    "example": "cpf"
                   },
                   "type": {
                     "description": "Tipo de cliente",
-                    "type": "string"
+                    "type": "string",
+                    "example": "individual"
                   },
                   "gender": {
                     "description": "Gênero do cliente",
-                    "type": "string"
+                    "type": "string",
+                    "example": "male"
                   },
                   "delinquent": {
                     "description": "Indica se o cliente está inadimplente",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "example": false
                   },
                   "created_at": {
                     "description": "Data de criação do cliente",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T00:00:00Z"
                   },
                   "updated_at": {
                     "description": "Data de atualização do cliente",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T00:00:00Z"
                   },
                   "birthdate": {
                     "description": "Data de nascimento do cliente",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2001-01-01T00:00:00Z"
                   },
                   "phones": {
                     "description": "Detalhes dos telefones do cliente",
@@ -807,49 +838,60 @@
                 "properties": {
                   "id": {
                     "description": "Identificação única do cartão",
-                    "type": "string"
+                    "type": "string",
+                    "example": "card_5jbVE0zI5IVZm7pR"
                   },
                   "first_six_digits": {
                     "description": "Primeiros seis dígitos do cartão",
-                    "type": "string"
+                    "type": "string",
+                    "example": "411111"
                   },
                   "last_four_digits": {
                     "description": "Últimos quatro dígitos do cartão",
-                    "type": "string"
+                    "type": "string",
+                    "example": "5248"
                   },
                   "brand": {
                     "description": "Bandeira do cartão",
-                    "type": "string"
+                    "type": "string",
+                    "example": "Mastercard"
                   },
                   "holder_name": {
                     "description": "Nome do titular do cartão",
-                    "type": "string"
+                    "type": "string",
+                    "example": "William Koerich"
                   },
                   "exp_month": {
                     "description": "Mês de expiração do cartão",
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 7
                   },
                   "exp_year": {
                     "description": "Ano de expiração do cartão",
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 29
                   },
                   "status": {
                     "description": "Status do cartão",
-                    "type": "string"
+                    "type": "string",
+                    "example": "active"
                   },
                   "type": {
                     "description": "Tipo de cartão",
-                    "type": "string"
+                    "type": "string",
+                    "example": "credit"
                   },
                   "created_at": {
                     "description": "Data de criação do cartão",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T18:49:36Z"
                   },
                   "updated_at": {
                     "description": "Data de atualização do cartão",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T18:49:36Z"
                   }
                 }
               },
@@ -859,59 +901,71 @@
                 "properties": {
                   "id": {
                     "description": "Identificação única do plano",
-                    "type": "string"
+                    "type": "string",
+                    "example": "plan_ZArz7zlF8FaV6OBW"
                   },
                   "name": {
                     "description": "Nome do plano",
-                    "type": "string"
+                    "type": "string",
+                    "example": "Plano Gold"
                   },
                   "url": {
                     "description": "URL do plano",
-                    "type": "string"
+                    "type": "string",
+                    "example": "plans/plan_ZArz7zlF8FaV6OBW/uniodonto-administradora/plano-gold"
                   },
                   "interval": {
                     "description": "Intervalo de cobrança do plano",
-                    "type": "string"
+                    "type": "string",
+                    "example": "month"
                   },
                   "interval_count": {
                     "description": "Número de intervalos do plano",
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1
                   },
                   "billing_type": {
                     "description": "Tipo de faturamento do plano",
-                    "type": "string"
+                    "type": "string",
+                    "example": "prepaid"
                   },
                   "payment_methods": {
                     "description": "Métodos de pagamento aceitos pelo plano",
                     "type": "array",
                     "items": {
-                      "type": "string"
+                      "type": "string",
+                      "example": "credit_card"
                     }
                   },
                   "installments": {
                     "description": "Número de parcelas permitidas pelo plano",
                     "type": "array",
                     "items": {
-                      "type": "integer"
+                      "type": "integer",
+                      "example": 1
                     }
                   },
                   "status": {
                     "description": "Status do plano",
-                    "type": "string"
+                    "type": "string",
+                    "example": "active"
                   },
                   "currency": {
                     "description": "Moeda do plano",
-                    "type": "string"
+                    "type": "string",
+                    "example": "BRL"
                   },
                   "created_at": {
                     "description": "Data de criação do plano",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T13:51:57Z"
                   },
                   "updated_at": {
                     "description": "Data de atualização do plano",
                     "type": "string",
-                    "format": "date-time"
+                    "format": "date-time",
+                    "example": "2023-11-03T13:51:57Z"
                   }
                 }
               },
@@ -923,45 +977,54 @@
                   "properties": {
                     "id": {
                       "description": "Identificação única do item",
-                      "type": "string"
+                      "type": "string",
+                      "example": "si_regARy7tetOdjX8x"
                     },
                     "name": {
                       "description": "Nome do item",
-                      "type": "string"
+                      "type": "string",
+                      "example": "Cooparticipação dentista fulano de tal"
                     },
                     "description": {
                       "description": "Descrição do item",
-                      "type": "string"
+                      "type": "string",
+                      "example": "Cooparticipação dentista fulano de tal"
                     },
                     "quantity": {
                       "description": "Quantidade do item",
-                      "type": "integer"
+                      "type": "integer",
+                      "example": 1
                     },
                     "status": {
                       "description": "Status do item",
-                      "type": "string"
+                      "type": "string",
+                      "example": "active"
                     },
                     "created_at": {
                       "description": "Data de criação do item",
                       "type": "string",
-                      "format": "date-time"
+                      "format": "date-time",
+                      "example": "2023-11-03T13:51:57Z"
                     },
                     "updated_at": {
                       "description": "Data de atualização do item",
                       "type": "string",
-                      "format": "date-time"
+                      "format": "date-time",
+                      "example": "2023-11-03T13:51:57Z"
                     },
                     "pricing_scheme": {
                       "description": "Esquema de precificação do item",
                       "type": "object",
                       "properties": {
                         "price": {
-                          "description": "Preço do item",
-                          "type": "integer"
+                          "description": "Preço do item em centavos",
+                          "type": "integer",
+                          "example": 100
                         },
                         "scheme_type": {
                           "description": "Tipo de esquema de precificação",
-                          "type": "string"
+                          "type": "string",
+                          "example": "unit"
                         }
                       }
                     }
@@ -976,15 +1039,18 @@
           },
           "status": {
             "description": "Status da operação",
-            "type": "string"
+            "type": "string",
+            "example": "success"
           },
           "code": {
             "description": "Código da operação",
-            "type": "string"
+            "type": "string",
+            "example": "200"
           },
           "message": {
             "description": "Mensagem descritiva da operação",
-            "type": "string"
+            "type": "string",
+            "example": "Assinatura criada com sucesso"
           }
         }
       },
