@@ -3165,6 +3165,11 @@
         }
       },
       "OrderRequest": {
+        "required": [
+          "cliente_id",
+          "items",
+          "pagamento"
+        ],
         "type": "object",
         "properties": {
           "cliente_id": {
@@ -3656,6 +3661,9 @@
               }
               },
       "OrderRetryRequest": {
+        "required": [
+          "cobranca_id"
+        ],
         "type": "object",
         "properties": {
           "cobranca_id": {
@@ -4210,6 +4218,9 @@
           }
         }
       }
+    },
+    "securitySchemes": {
+
     }
   }
 }
