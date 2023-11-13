@@ -3268,8 +3268,8 @@
                 "cvv": 723
               },
               "parcelas": 1,
-                "nome_fatura_cartao": "Avengers",
-                "metodo_pagamento": "credit_card"
+              "nome_fatura_cartao": "Avengers",
+              "metodo_pagamento": "credit_card"
             }
           }
 
