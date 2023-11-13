@@ -59,7 +59,7 @@
       ]
     },
     {
-      "group": "Pedidos",
+      "group": "Cobraças",
       "pages": [
         "api-reference/pedidos/create",
         "api-reference/pedidos/retry",
