@@ -3187,23 +3187,80 @@
             "properties": {
               "valor": {
                 "type": "number",
-                "description": "Valor do item"
+                "description": "Valor do item",
+                "example": 100
               },
               "descricao": {
                 "type": "string",
-                "description": "Descrição do item"
+                "description": "Descrição do item",
+                "example": "Valor cooparticipação"
               },
               "quantidade": {
                 "type": "integer",
-                "description": "Quantidade do item"
+                "description": "Quantidade do item",
+                "example": 1
               },
               "codigo": {
                 "type": "string",
-                "description": "Código do item"
+                "description": "Código do item",
+                "example": "123"
               }
             },
             "description": "Detalhes do item a ser pago"
+          },
+          "pagamento": {
+            "type": "object",
+            "properties": {
+              "cartao": {
+                "type": "object",
+                "properties": {
+                  "numero": {
+                    "type": "string",
+                    "description": "Número do cartão",
+                    "example": "5502095668975248"
+                  },
+                  "nome": {
+                    "type": "string",
+                    "description": "Nome do titular do cartão",
+                    "example": "William Koerich"
+                  },
+                  "exp_mes": {
+                    "type": "integer",
+                    "description": "Mês de expiração do cartão",
+                    "example": 7
+                  },
+                  "exp_ano": {
+                    "type": "integer",
+                    "description": "Ano de expiração do cartão",
+                    "example": 29
+                  },
+                  "cvv": {
+                    "type": "integer",
+                    "description": "Código de segurança do cartão",
+                    "example": 723
+                  }
+                },
+                "description": "Detalhes do cartão de crédito"
+              },
+              "parcelas": {
+                "type": "integer",
+                "description": "Número de parcelas",
+                "example": 1
+              },
+              "nome_fatura_cartao": {
+                "type": "string",
+                "description": "Nome que aparecerá na fatura do cartão",
+                "example": "Avengers"
+              },
+              "metodo_pagamento": {
+                "type": "string",
+                "description": "Método de pagamento (ex: credit_card)",
+                "example": "credit_card"
+              }
+            },
+            "description": "Detalhes do pagamento"
           }
+
         }
       },
       "OrderResponse": {
