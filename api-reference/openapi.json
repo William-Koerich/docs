@@ -403,6 +403,12 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/OrderRequest"
+              },
+              "example": {
+                "valor": 100,
+                "descricao": "Valor cooparticipação",
+                "quantidade": 1,
+                "codigo": "123"
               }
             }
           },
@@ -3195,12 +3201,6 @@
                 "type": "string",
                 "description": "Código do item"
               }
-            },
-            "example": {
-              "valor": 100,
-              "descricao": "Valor cooparticipação",
-              "quantidade": 1,
-              "codigo": "123"
             },
             "description": "Detalhes do item a ser pago"
           }
