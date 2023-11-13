@@ -1062,6 +1062,14 @@
         ]
       },
       "SearchSubscriptionRequest": {
+        "required": [
+          "codigo_assinatura",
+          "cliente_id",
+          "plano_id",
+          "status",
+          "data_inicio_periodo_criacao",
+          "data_final_periodo_criacao"
+        ],
         "type": "object",
         "properties": {
           "status": {
