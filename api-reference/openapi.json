@@ -3174,31 +3174,26 @@
         "properties": {
           "cliente_id": {
             "type": "string",
-            "description": "ID do cliente",
-            "example": "cus_b0kYqzNs6soq82dD"
+            "description": "ID do cliente"
           },
           "items": {
             "type": "object",
             "properties": {
               "valor": {
                 "type": "number",
-                "description": "Valor do item",
-                "example": 100
+                "description": "Valor do item"
               },
               "descricao": {
                 "type": "string",
-                "description": "Descrição do item",
-                "example": "Valor cooparticipação"
+                "description": "Descrição do item"
               },
               "quantidade": {
                 "type": "integer",
-                "description": "Quantidade do item",
-                "example": 1
+                "description": "Quantidade do item"
               },
               "codigo": {
                 "type": "string",
-                "description": "Código do item",
-                "example": "123"
+                "description": "Código do item"
               }
             },
             "example": {
