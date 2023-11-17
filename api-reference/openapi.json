@@ -3172,7 +3172,6 @@
       },
       "OrderRequest": {
         "required": [
-          "cliente_id",
           "items",
           "pagamento"
         ],
@@ -3181,6 +3180,61 @@
           "cliente_id": {
             "type": "string",
             "description": "ID do cliente"
+          },
+          "cliente": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string",
+                "description": "Nome do cliente",
+                "example": "John Arnold"
+              },
+              "email": {
+                "type": "string",
+                "description": "E-mail do cliente",
+                "example": "arnold.john@gmail.com"
+              },
+              "tipo_cliente": {
+                "type": "string",
+                "description": "Tipo do cliente",
+                "example": "individual"
+              },
+              "codigo": {
+                "type": "string",
+                "description": "Código do cliente no sistema Uniodonto",
+                "example": "123"
+              },
+              "documento": {
+                "type": "string",
+                "description": "Documento do cliente",
+                "example": "10079514944"
+              },
+              "tipo_documento": {
+                "type": "string",
+                "description": "Tipo do documento do cliente",
+                "example": "CPF"
+              },
+              "genero": {
+                "type": "string",
+                "description": "Genero do cliente",
+                "example": "male"
+              },
+              "codigo_pais": {
+                "type": "string",
+                "description": "Código do país",
+                "example": "55"
+              },
+              "ddd": {
+                "type": "string",
+                "description": "Código de área do telefone",
+                "example": "47"
+              },
+              "telefone": {
+                "type": "string",
+                "description": "Número do telefone",
+                "example": "996348990"
+              }
+            }
           },
           "items": {
             "type": "object",
@@ -3247,6 +3301,36 @@
                   }
                 },
                 "description": "Detalhes do cartão de crédito"
+              },
+              "endereco": {
+                "type": "object",
+                "properties": {
+                  "cep": {
+                    "type": "string",
+                    "description": "CEP do endereço",
+                    "example": "20021130"
+                  },
+                  "logradouro": {
+                    "type": "string",
+                    "description": "Logradouro do endereço",
+                    "example": "375, Av. General Justo, Centro"
+                  },
+                  "cidade": {
+                    "type": "string",
+                    "description": "Cidade do endereço",
+                    "example": "Rio de Janeiro"
+                  },
+                  "estado": {
+                    "type": "string",
+                    "description": "Estado do endereço",
+                    "example": "RJ"
+                  },
+                  "pais": {
+                    "type": "string",
+                    "description": "País do endereço",
+                    "example": "BR"
+                  }
+                }
               },
               "parcelas": {
                 "type": "integer",
