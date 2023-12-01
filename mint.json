@@ -70,7 +70,7 @@
     {
       "group": "Checkout",
       "pages": [
-        "api-reference/checkout/generate-checkout"
+        "api-reference/checkout/generate"
       ]
     }
   ]
