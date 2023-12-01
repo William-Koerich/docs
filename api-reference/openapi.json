@@ -551,6 +551,50 @@
           }
         }
       }
+    },
+    "/generate-checkout": {
+      "post": {
+        "description": "Cria um checkout",
+        "requestBody": {
+          "description": "Geração de checkout",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateCheckoutRequest"
+              },
+              "example": {
+                "valor": 100,
+                "descricao": "Valor cooparticipação",
+                "quantidade": 1,
+                "codigo": "123"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateCheckoutResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4297,6 +4341,68 @@
             "type": "string",
             "description": "ID da cobrança",
             "example": "ch_x7KBdjZCabiAWvVJ"
+          }
+        }
+      },
+      "GenerateCheckoutRequest": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "object",
+            "properties": {
+              "valor": {
+                "type": "number",
+                "description": "Valor do item",
+                "example": 100
+              },
+              "descricao": {
+                "type": "string",
+                "description": "Descrição do item",
+                "example": "Valor cooparticipação"
+              },
+              "quantidade": {
+                "type": "integer",
+                "description": "Quantidade do item",
+                "example": 1
+              },
+              "codigo": {
+                "type": "string",
+                "description": "Código do item",
+                "example": "123"
+              }
+            },
+            "example": {
+              "valor": 100,
+              "descricao": "Valor cooparticipação",
+              "quantidade": 1,
+              "codigo": "123"
+            },
+            "description": "Detalhes do item a ser pago"
+          }
+        }
+      },
+      "GenerateCheckoutResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da resposta",
+            "example": "success"
+          },
+          "code": {
+            "type": "string",
+            "description": "Código da resposta",
+            "example": "200"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensagem da resposta",
+            "example": "Checkout gerado com sucesso!"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL do checkout",
+            "example": "https://www.sisoweb.coop.br/orders/643ed246gdsw3"
           }
         }
       },

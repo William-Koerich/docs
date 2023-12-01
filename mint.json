@@ -66,6 +66,12 @@
         "api-reference/pedidos/list",
         "api-reference/pedidos/cancelcharge"
       ]
+    },
+    {
+      "group": "Checkout",
+      "pages": [
+        "api-reference/checkout/generate-checkout"
+      ]
     }
   ]
 }
