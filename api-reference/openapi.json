@@ -627,6 +627,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "cliente": {
             "type": "object",
             "properties": {
@@ -697,6 +701,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "assinatura": {
             "description": "Detalhes da assinatura",
             "type": "object",
@@ -1114,6 +1122,10 @@
       "SearchSubscriptionRequest": {
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "status": {
             "description": "Status da assinatura, valores possíveis: active, canceled ou future",
             "type": "string"
@@ -1514,6 +1526,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "cartao": {
             "description": "Detalhes do cartão de crédito",
             "type": "object",
@@ -1925,6 +1941,10 @@
         "required": ["assinatura_id", "cancelar_cobrancas_pendentes"],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "assinatura_id": {
             "description": "Identificação única da assinatura a ser cancelada",
             "type": "string"
@@ -2367,6 +2387,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "nome": {
             "description": "Nome do cliente",
             "type": "string",
@@ -2548,6 +2572,10 @@
           "data_nascimento"
         ],
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "cliente_id": {
             "description": "Identificação única do cliente",
             "type": "string",
@@ -2745,6 +2773,10 @@
         "type": "object",
         "required": ["nome", "preco"],
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "nome": {
             "description": "Nome do plano",
             "type": "string",
@@ -2913,6 +2945,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "nome": {
             "description": "Nome do plano Silver",
             "type": "string",
@@ -3110,6 +3146,10 @@
         "required": ["plano_id"],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "plano_id": {
             "description": "ID do plano",
             "type": "string",
@@ -3221,6 +3261,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "cliente_id": {
             "type": "string",
             "description": "ID do cliente"
@@ -3805,6 +3849,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "cobranca_id": {
             "type": "string",
             "description": "ID da cobrança",
@@ -4291,6 +4339,10 @@
       "OrderSearchRequest": {
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "cliente_id": {
             "type": "string",
             "description": "ID do cliente",
@@ -4337,6 +4389,10 @@
         ],
         "type": "object",
         "properties": {
+          "tipo_empresa": {
+            "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+            "type": "string"
+          },
           "cobranca_id": {
             "type": "string",
             "description": "ID da cobrança",
@@ -4350,6 +4406,10 @@
           "items": {
             "type": "object",
             "properties": {
+              "tipo_empresa": {
+                "description": "Tipo de empresa. Ex: FED OU ADM se não passar o sistema assume como ADM",
+                "type": "string"
+              },
               "valor": {
                 "type": "number",
                 "description": "Valor do item",
