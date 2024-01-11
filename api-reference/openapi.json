@@ -595,6 +595,50 @@
           }
         }
       }
+    },
+    "/order/create/pix": {
+      "post": {
+        "description": "Cria uma cobrança pix",
+        "requestBody": {
+          "description": "Cobrança para ser criada",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              },
+              "example": {
+                "valor": 100,
+                "descricao": "Valor cooparticipação",
+                "quantidade": 1,
+                "codigo": "123"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta quando der sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
