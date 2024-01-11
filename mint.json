@@ -64,7 +64,8 @@
         "api-reference/pedidos/create",
         "api-reference/pedidos/retry",
         "api-reference/pedidos/list",
-        "api-reference/pedidos/cancelcharge"
+        "api-reference/pedidos/cancelcharge",
+        "api-reference/pedidos/pix"
       ]
     },
     {
