@@ -72,6 +72,12 @@
       "pages": [
         "api-reference/checkout/generate"
       ]
+    },
+    {
+      "group": "Pix",
+      "pages": [
+        "api-reference/pix/create"
+      ]
     }
   ]
 }
